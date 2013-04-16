@@ -8,7 +8,7 @@ use System\Session as Session;
 class Home extends \System\Controller {
     
     public function getIndex() {
-        echo 'Hellószia! :D';
+        $this->view->render('home/welcome.php');
     }
     
     public function getDb() {

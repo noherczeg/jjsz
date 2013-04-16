@@ -44,6 +44,6 @@ spl_autoload_register('autoload');
  * Inicializalas
  */
 
-System\Router::init();
+System\Url::init();
 System\Session::init();
 System\Database::init('db.ini');

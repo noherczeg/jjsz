@@ -2,14 +2,15 @@
 
 namespace System;
 
-class Url {
+class Request {
     
     private static $segments = array();
     private static $base_url = "";
+    private static $method = "";
     
     public static function init() {
         /**
-         * URI kinyerese
+         * URI
          */
         $uri = $_SERVER['QUERY_STRING'];
 
@@ -28,15 +29,22 @@ class Url {
          * bazis url
          */
         $folder = str_replace(START_FILE, '', $_SERVER['SCRIPT_NAME']);
-        static::$base_url .= "http://" . $_SERVER['SERVER_NAME'] . "/" . $folder;
+        $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === true ? 'https://' : 'http://';
+        $domain = $_SERVER['HTTP_HOST'];
+        static::$base_url .= $protocol . $domain . $folder;
+        
+        /**
+         * method
+         */
+        static::$method = strtolower($_SERVER['REQUEST_METHOD']);
     }
     
     public static function getSegment($id) {
-        if (array_key_exists($id, static::$segments)) {
+        if (array_key_exists($id, static::$segments))
             return static::$segments[$id];
-        } else {
-            return false;
-        }
+        
+        return false;
+        
     }
     
     public static function getSegments() {
@@ -45,6 +53,24 @@ class Url {
 
     public static function getBaseURL() {
         return static::$base_url;
+    }
+    
+    public static function getMethod() {
+        return static::$method;
+    }
+    
+    public static function controller() {
+        if (isset(static::$segments[0]))
+            return static::$segments[0];
+        
+        return false;
+    }
+    
+    public static function action() {
+        if (isset(static::$segments[1]))
+            return static::$segments[1];
+        
+        return false;
     }
     
 }

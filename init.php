@@ -5,11 +5,16 @@
  */
 define('DS', DIRECTORY_SEPARATOR);
 define('APP_PATH', realpath(__DIR__));
+
 define('CONTROLLER_DIR', __DIR__ . DS . 'Controller' . DS);
-define('RESOURCES_DIR', __DIR__ . DS . 'Resources' . DS);
+define('ASSET_DIR', 'Asset');
+define('ASSET_PATH', __DIR__ . DS . ASSET_DIR . DS);
 define('VIEWS_DIR', __DIR__ . DS . 'View' . DS);
+
 define('SESSION_TIMEOUT', 60*30);
+
 define('START_FILE', 'index.php');
+
 define('DEFAULT_PAGE', 'home');
 define('DEFAULT_ACTION', 'index');
 
@@ -49,3 +54,4 @@ System\Request::init();
 System\Session::init();
 System\Database::init('db.ini');
 System\View::init(VIEWS_DIR);
+System\Asset::init(ASSET_PATH);

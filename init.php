@@ -4,6 +4,7 @@
  * Konstansok
  */
 define('DS', DIRECTORY_SEPARATOR);
+define('APP_PATH', realpath(__DIR__));
 define('CONTROLLER_DIR', __DIR__ . DS . 'Controller' . DS);
 define('RESOURCES_DIR', __DIR__ . DS . 'Resources' . DS);
 define('VIEWS_DIR', __DIR__ . DS . 'View' . DS);
@@ -44,6 +45,7 @@ spl_autoload_register('autoload');
  * Inicializalas
  */
 
-System\Url::init();
+System\Request::init();
 System\Session::init();
 System\Database::init('db.ini');
+System\View::init(VIEWS_DIR);

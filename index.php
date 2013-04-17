@@ -11,17 +11,16 @@ try {
     switch ($e->getCode()) {
         
         // Statusz kodokrol bovebben: http://en.wikipedia.org/wiki/List_of_HTTP_status_codes
-        case 404:
-            echo '<h3>404</h3><p>A kért oldal nem található!</p>';
-            break;
-        case 401:
-            echo '<h3>401</h3><p>Authentikáció sikertelen!</p>';
-            break;
         case 403:
-            echo '<h3>403</h3><p>Hozzáférés megtagadva!</p>';
+            System\View::make('error/403.php');
+            break;
+        case 404:
+            System\View::make('error/404.php');
             break;
         default:
-            echo '<h3>500</h3><p>Fogalmunk sincs mi a baj o.O</p>';
+            System\View::make('error/500.php');
             break;
     }
 }
+
+System\View::render();

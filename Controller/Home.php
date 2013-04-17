@@ -4,11 +4,13 @@ namespace Controller;
 
 use System\Database as Database;
 use System\Session as Session;
+use System\View as View;
+use System\Request as Request;
 
 class Home extends \System\Controller {
     
     public function getIndex() {
-        $this->view->render('home/welcome.php');
+        View::make('home/welcome.php');
     }
     
     public function getDb() {
@@ -23,7 +25,7 @@ class Home extends \System\Controller {
         $this->data['title'] = "Login form";
         $this->data['ido'] = strftime('%Y. %B %d. %H:%I:%S', Session::get('LAST_ACTIVITY'));
         
-        $this->view->render('home/login.php', $this->data);
+        View::make('home/login.php', $this->data);
     }
     
     public function postForm() {
@@ -36,6 +38,10 @@ class Home extends \System\Controller {
         $user->age = 10;
         
         var_dump($user);
+    }
+    
+    public function getUrl() {
+        echo Request::getBaseURL();
     }
     
 }

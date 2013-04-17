@@ -7,37 +7,22 @@ class Router {
     public static function loadController() {
 
         // controller
-        $properName = '';
+        $properName = ucfirst(DEFAULT_PAGE);
 
-        if (Url::getSegment(0)) {
-            $properName = ucfirst(strtolower(Url::getSegment(0)));
-        } else {
-            $properName = ucfirst(DEFAULT_PAGE);
-        }
+        if (Request::controller())
+            $properName = ucfirst(strtolower(Request::controller()));
 
         $file = CONTROLLER_DIR . $properName . '.php';
         $controllerName = '\\Controller\\' . $properName;
 
-        // request
-        $request = '';
-
-        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            $request = 'post';
-        } else {
-            $request = 'get';
-        }
-
         // action
-        $action = '';
+        $action = ucfirst(DEFAULT_ACTION);
 
-        if (Url::getSegment(1)) {
-            $action = ucfirst(strtolower(Url::getSegment(1)));
-        } else {
-            $action = ucfirst(DEFAULT_ACTION);
-        }
+        if (Request::action())
+            $action = ucfirst(strtolower(Request::action()));
 
         // request fuggo metodus
-        $method = $request . $action;
+        $method = Request::getMethod() . $action;
 
         if (is_file($file)) {
             $controller = new $controllerName;

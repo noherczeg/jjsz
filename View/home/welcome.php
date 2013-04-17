@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Ez a ciiiim!</title>
-        <link rel="stylesheet" href="<?= \System\Request::getBaseURL(). "Resources/css/style.css"; ?>">
+        <link rel="stylesheet" href="<?= \System\Asset::get('css/style.css'); ?>">
         <script src="Resources/js/script.js"></script>
     </head>
     <body>

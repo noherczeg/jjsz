@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>404</title>
-        <link rel="stylesheet" href="<?= \System\Request::getBaseURL(). "Resources/css/style.css"; ?>">
+        <link rel="stylesheet" href="<?= \System\Asset::get('css/style.css'); ?>">
     </head>
     <body>
         <h3>404</h3>

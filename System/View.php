@@ -18,14 +18,9 @@ class View {
             throw new Exception('Nem talalom a megadott view-t: ' . $view_file);
         }
         
-        $filtered = array();
-        
-        foreach ($vars as $key => $var) {
-            $filtered[$key] = filter_var($var, FILTER_SANITIZE_STRING);
-        }
-        
-        extract($filtered);
+        extract($vars);
 
+        // output buffer bekapcs, ebbe tesszuk a tartalmat!
         ob_start();
         include $view_file;
         static::$content = ob_get_clean();

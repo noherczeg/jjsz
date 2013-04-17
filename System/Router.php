@@ -7,13 +7,13 @@ class Router {
     public static function loadController() {
 
         // controller
-        $properName = ucfirst(DEFAULT_PAGE);
+        $controllerName = ucfirst(DEFAULT_PAGE);
 
         if (Request::controller())
-            $properName = ucfirst(strtolower(Request::controller()));
+            $controllerName = ucfirst(strtolower(Request::controller()));
 
-        $file = CONTROLLER_DIR . $properName . '.php';
-        $controllerName = '\\Controller\\' . $properName;
+        $file = CONTROLLER_DIR . $controllerName . '.php';
+        $controllerNamespace = '\\Controller\\' . $controllerName;
 
         // action
         $action = ucfirst(DEFAULT_ACTION);
@@ -25,7 +25,7 @@ class Router {
         $method = Request::getMethod() . $action;
 
         if (is_file($file)) {
-            $controller = new $controllerName;
+            $controller = new $controllerNamespace;
 
             // metodus futtatasa :)
             if (method_exists($controller, $method)) {

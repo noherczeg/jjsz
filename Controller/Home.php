@@ -6,6 +6,7 @@ use System\Database as Database;
 use System\Session as Session;
 use System\View as View;
 use System\Request as Request;
+use System\Cookie as Cookie;
 
 class Home extends \System\Controller {
     
@@ -42,6 +43,14 @@ class Home extends \System\Controller {
     
     public function getUrl() {
         echo Request::getBaseURL();
+    }
+    
+    public function getCookie() {
+        var_dump(Cookie::getAll());
+        
+        if (!Cookie::is_set('asd')) {
+            Cookie::set('asd', 'teszt', time() + 3600);
+        }
     }
     
 }

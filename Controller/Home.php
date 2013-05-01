@@ -11,7 +11,26 @@ use System\Cookie as Cookie;
 class Home extends \System\Controller {
     
     public function getIndex() {
-        View::make('home/welcome.php');
+        $this->data['user'] = Session::get('user');
+        View::make('home/welcome.php', $this->data);
+    }
+    
+    public function getLogin() {
+        $this->data['title'] = "Login form";
+        $this->data['ido'] = strftime('%Y. %B %d. %H:%I:%S', Session::get('LAST_ACTIVITY'));
+        
+        View::make('home/login.php', $this->data);
+    }
+    
+    public function postLogin() {
+        $name = filter_var($_POST['name']);
+        $pass = md5(filter_var($_POST['password']));
+        var_dump(\System\Auth::login($name, $pass));
+    }
+    
+    public function getLogout() {
+        \System\Auth::logout();
+        header('Location: ' . \Request::getBaseURL());
     }
     
     public function getDb() {
@@ -20,13 +39,6 @@ class Home extends \System\Controller {
         while ($elem = $lekerd->fetch(\PDO::FETCH_OBJ)) {
             var_dump($elem);
         }
-    }
-    
-    public function getForm() {
-        $this->data['title'] = "Login form";
-        $this->data['ido'] = strftime('%Y. %B %d. %H:%I:%S', Session::get('LAST_ACTIVITY'));
-        
-        View::make('home/login.php', $this->data);
     }
     
     public function postForm() {

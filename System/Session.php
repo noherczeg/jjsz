@@ -16,9 +16,8 @@ class Session {
     }
 
     public static function get($element) {
-        if (!array_key_exists($element, $_SESSION)) {
-            throw new Exception('A kert session elem nem talalhato: ' . $element);
-        }
+        if (!array_key_exists($element, $_SESSION))
+            return null;
         
         return $_SESSION[$element];
     }
@@ -33,7 +32,7 @@ class Session {
 
     public static function remove($key) {
         if (!array_key_exists($key, $_SESSION)) {
-            throw new Exception('A kert session elem nem talalhato, nem torolheto: ' . $element);
+            throw new \Exception('A kert session elem nem talalhato, nem torolheto: ' . $element);
         }
         
         unset($_SESSION[$key]);

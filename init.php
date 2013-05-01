@@ -55,3 +55,4 @@ System\Session::init();
 System\Database::init('db.ini');
 System\View::init(VIEWS_DIR);
 System\Asset::init(ASSET_PATH);
+System\Auth::init();

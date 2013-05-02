@@ -9,7 +9,7 @@ class Cookie {
             return filter_var($_COOKIE[$name], FILTER_SANITIZE_STRING);
         }
         
-        throw new Exception("Nincs ilyen nevvel sutink!");
+        throw new \Exception("Nincs ilyen nevvel sutink!");
     }
     
     public static function getAll() {

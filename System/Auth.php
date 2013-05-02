@@ -11,6 +11,10 @@ class Auth {
             static::$user = Session::get('user');
     }
     
+    public static function getUser() {
+        return static::$user;
+    }
+
     public static function check() {
         if (isset(static::$user))
             return true;
@@ -22,7 +26,7 @@ class Auth {
             ':name' => filter_var($name, FILTER_SANITIZE_STRING),
             ':password' => md5(filter_var($pass, FILTER_SANITIZE_STRING))
         );
-        $query = Database::query("SELECT * FROM user WHERE name=:name AND password=:password", $params);
+        $query = Database::query("SELECT * FROM users WHERE name=:name AND password=:password", $params);
         $user = $query->fetch(\PDO::FETCH_OBJ);
         
         if ($user) {
